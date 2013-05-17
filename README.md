@@ -16,11 +16,11 @@ This assumes you want your project versioned like this:
 
 All builds will be tagged thusly:
 
-    (BRANCH),(MAJOR),(BUILD)
+    build,(MAJOR),(BUILD)
 
 If you want your project to use a MAJOR that is NOT equal to the branch name (e.g. you want branch 'master' to be '1.1'), then you must set an initial tag on that branch, e.g:
 
-    master,1.1,0
+    build,1.1,0
 
 ... And then the scripts will use 1.1, instead of 'master', as the MAJOR version component.
 
@@ -44,7 +44,7 @@ Generate a version
 Two scripts, 'gitversion' and 'hgversion' generate version metadata for git and hg, respectively. The data output by these two is meant to be consumed by bash.
 
     []$ hgversion
-    TAG="6.3.0"
+    TAG="build,6.3.0,0"
     BRANCH="6.3.0"
     MAJOR="6.3.0"
     BUILD="0"
