@@ -22,6 +22,6 @@ elif [ "$TAGSHA1" != "" ] && [ "$TAGSHA1" == "$SHA1" ]; then
 else
     git tag -f -a "build,${MAJOR},${BUILD}" $SHA1
     if [ "$PUSHTAG" != "false" ]; then
-	git push
+	git push --tags
     fi
 fi
