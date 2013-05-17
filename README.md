@@ -64,9 +64,9 @@ This can be piped into a bash script for later sourcing. You can source this int
 Cutting a Tag
 =============
 
-To cut a tag, just run 'gittag' or 'hgtag':
+To cut a tag, just run 'taggit' or 'taghg':
 
-    []$ gittag
+    []$ taggit
 
 ... This will tag the current revision with a new build number. UNLESS:
 
