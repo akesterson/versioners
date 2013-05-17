@@ -27,14 +27,6 @@ else
     fi
 fi
 
-if [ "$TAG" == "" ] || [ "$TAG" == "tip" ]; then
-    if [ "$MAJOR" == "default" ]; then
-	TAG="0.0"
-    else
-	TAG="$MAJOR"
-    fi
-fi
-
 OS_NAME=""
 OS_VERSION=""
 if [ "$OS_NAME" == "" ] && [ "$(uname)" == "Darwin" ]; then
