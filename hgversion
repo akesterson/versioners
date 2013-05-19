@@ -7,9 +7,10 @@ fi
 
 REBUILDING=0
 SHA1=$(hg identify -i | grep -Eo "[a-zA-Z0-9]+")
-TAG=$(hg identify -t)
-LASTTAGGEDBUILD=$(hg log -r $(hg identify -n):0 --branch $BRANCH --template "{tags}\n" | grep -v "^$" | grep "build|" | head -n 1)
+TAG=$(hg parents --template '{latesttag}')
+TAGSHA=$(hg identify -r $TAG | cut -d ' ' -f 1)
 BUILD=0
+CHANGELOG="$(hg log -X .hgtags --style=changelog -r ${TAG}:${SHA1})"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1
@@ -20,6 +21,7 @@ else
     SHORTTAGSHA=${TAGSHA:0:12}
     hg log -r ${SHA1} | grep "Added tag build|${BRANCH}|${BUILD} for changeset ${SHORTTAGSHA}" >/dev/null
     if [ $? -ne 0 ] && [ "$TAGSHA" != "$SHA1" ]; then
+	CHANGELOG="$(hg log -X .hgtags --style=changelog -r ${SHORTTAGSHA}:${SHA1})"
 	BUILD=$(expr $BUILD + 1)
 	REBUILDING=1
     else
@@ -33,7 +35,7 @@ if [ "$OS_NAME" == "" ] && [ "$(uname)" == "Darwin" ]; then
     OS_NAME="osx"
 elif [ "$OS_NAME" == "" ] && [ -f /etc/redhat-release ]; then
     OS_NAME="el"
-elif [ "$OS_NAME" == "" ] && [ "$(uname | grep -i '^MINGW')" != "" ] || [ "$(uname)" == "Cygwin" ]; then
+elif [ "$OS_NAME" == "" ] && [ "$(uname | grep -i '^MINGW')" != "" ] || [ "$(uname | grep -i '^CYGWIN')" != "" ]; then
     OS_NAME="win"
 fi
 
@@ -56,7 +58,7 @@ if [ "$ARCH" == "" ]; then
     fi
 fi
 
-SOURCE=$(cat .hg/hgrc | grep default | cut -d = -f 2 | sed s/"^ *"//g)
+SOURCE=$((cat .hg/hgrc 2>/dev/null | grep default | cut -d = -f 2 | sed s/"^ *"//g) || echo '')
 
 echo "TAG=\"${TAG}\""
 echo "BRANCH=\"${BRANCH}\""
@@ -72,3 +74,4 @@ echo "BUILDUSER=\"$(whoami)\""
 echo "BUILDDIR=\"$(pwd)\""
 echo "SOURCE=\"${SOURCE}\""
 echo "REBUILDING=$REBUILDING"
+echo "CHANGELOG=\"$CHANGELOG\""

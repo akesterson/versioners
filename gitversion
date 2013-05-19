@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOGSPEC='%ci %an <%aE>%n%n    %s%n    [%h]%d%n'
+
 BRANCH=$2
 if [ "${BRANCH}" == "" ]; then
     BRANCH=$(git branch | grep '^\*\s*.*' | cut -d ' ' -f 2)
@@ -9,6 +11,7 @@ REBUILDING=0
 SHA1=$(git rev-parse HEAD)
 TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
 BUILD=0
+CHANGELOG="$(git log --format="format:$LOGSPEC" ${BRANCH}@{0}..HEAD)"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1
@@ -18,6 +21,7 @@ else
     BUILD=$(echo $TAG | cut -d , -f 3)
     TAGSHA=$(git rev-list $TAG | head -n 1)
     if [ "$TAGSHA" != "$SHA1" ]; then
+	CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
 	BUILD=$(expr $BUILD + 1)
 	REBUILDING=1
     else
@@ -31,7 +35,7 @@ if [ "$OS_NAME" == "" ] && [ "$(uname)" == "Darwin" ]; then
     OS_NAME="osx"
 elif [ "$OS_NAME" == "" ] && [ -f /etc/redhat-release ]; then
     OS_NAME="el"
-elif [ "$OS_NAME" == "" ] && [ "$(uname | grep -i '^MINGW')" != "" ] || [ "$(uname)" == "Cygwin" ]; then
+elif [ "$OS_NAME" == "" ] && [ "$(uname | grep -i '^MINGW')" != "" ] || [ "$(uname | grep -i '^CYGWIN')" != "" ]; then
     OS_NAME="win"
 fi
 
@@ -54,7 +58,7 @@ if [ "$ARCH" == "" ]; then
     fi
 fi
 
-SOURCE=$(git remote show origin | grep "Fetch URL" | cut -d : -f 2- | cut -d ' ' -f 2-)
+SOURCE=$((git remote show origin 2>/dev/null | grep "Fetch URL" | cut -d : -f 2- | cut -d ' ' -f 2-) || echo '')
 
 echo "TAG=\"${TAG}\""
 echo "BRANCH=\"${BRANCH}\""
@@ -70,3 +74,4 @@ echo "BUILDUSER=\"$(whoami)\""
 echo "BUILDDIR=\"$(pwd)\""
 echo "SOURCE=\"${SOURCE}\""
 echo "REBUILDING=$REBUILDING"
+echo "CHANGELOG=\"$CHANGELOG\""
