@@ -1,7 +1,7 @@
 Versioners
 ==========
 
-This is a set of scripts that I use for automatically tagging, and generating version/build metadata for, mercurial and git projects. They provide your automation with quite a bit of information about the version being built, where it is built, and who built it.
+This is a set of scripts that I use for automatically tagging, and generating version/build metadata for, mercurial and git projects. They provide your automation with quite a bit of information about the version being built, where it is built, and who built it. They also generate automatic changelogs for you.
 
 Assumptions
 ===========
@@ -58,8 +58,11 @@ Two scripts, 'gitversion' and 'hgversion' generate version metadata for git and 
     BUILDDIR="/c/Users/akesterson/source/upstream/hg/project"
     SOURCE="http://bitbucket.org/akesterson/project"
     REBUILDING=1
+    CHANGELOG=""
 
 This can be piped into a bash script for later sourcing. You can source this into a variety of other languages as well (python or ruby), but the ${:-} syntax is bash specific, and might confuse other languages.
+
+The changelog will contain a brief log of all commits between the previous build tag and this build.
 
 Cutting a Tag
 =============
