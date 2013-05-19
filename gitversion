@@ -9,9 +9,10 @@ fi
 
 REBUILDING=0
 SHA1=$(git rev-parse HEAD)
-TAG=$(git describe --tags `git rev-list --tags --max-count=1 HEAD` 2>/dev/null)
+TAG=$(git describe --tags --abbrev=0 `git rev-list --tags --max-count=1 HEAD` 2>/dev/null)
 BUILD=0
-CHANGELOG="$(git log --format="format:$LOGSPEC" ${BRANCH}@{0}..HEAD)"
+TAGSHA=$(git rev-list $TAG | head -n 1)
+CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD)"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1
@@ -19,7 +20,6 @@ if [ "$TAG" == "" ]; then
 else
     MAJOR=$(echo $TAG | cut -d , -f 2)
     BUILD=$(echo $TAG | cut -d , -f 3)
-    TAGSHA=$(git rev-list $TAG | head -n 1)
     if [ "$TAGSHA" != "$SHA1" ]; then
 	CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
 	BUILD=$(expr $BUILD + 1)
