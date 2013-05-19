@@ -10,18 +10,18 @@ SHA1=$(hg identify -i | grep -Eo "[a-zA-Z0-9]+")
 TAG=$(hg parents --template '{latesttag}')
 TAGSHA=$(hg identify -r $TAG | cut -d ' ' -f 1)
 BUILD=0
-CHANGELOG="$(hg log -X .hgtags --style=changelog -r ${TAG}:${SHA1})"
+CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${TAG}:${SHA1})"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1
     MAJOR=$BRANCH
 else
-    MAJOR=$(echo $TAG | cut -d , -f 2)
-    BUILD=$(echo $TAG | cut -d , -f 3)
+    MAJOR=$(echo $TAG | cut -d \| -f 2)
+    BUILD=$(echo $TAG | cut -d \| -f 3)
     SHORTTAGSHA=${TAGSHA:0:12}
-    hg log -r ${SHA1} | grep "Added tag build|${BRANCH}|${BUILD} for changeset ${SHORTTAGSHA}" >/dev/null
+    hg log -r tip | grep "Added tag build|${BRANCH}|${BUILD} for changeset ${SHORTTAGSHA}" >/dev/null
     if [ $? -ne 0 ] && [ "$TAGSHA" != "$SHA1" ]; then
-	CHANGELOG="$(hg log -X .hgtags --style=changelog -r ${SHORTTAGSHA}:${SHA1})"
+	CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${SHORTTAGSHA}:${SHA1})"
 	BUILD=$(expr $BUILD + 1)
 	REBUILDING=1
     else

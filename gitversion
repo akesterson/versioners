@@ -9,7 +9,7 @@ fi
 
 REBUILDING=0
 SHA1=$(git rev-parse HEAD)
-TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
+TAG=$(git describe --tags `git rev-list --tags --max-count=1 HEAD` 2>/dev/null)
 BUILD=0
 CHANGELOG="$(git log --format="format:$LOGSPEC" ${BRANCH}@{0}..HEAD)"
 if [ "$TAG" == "" ]; then
