@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SEP=${VERSIONERS_SEPARATOR:-,}
+VERSIONERS_TAGBASE=${VERSIONERS_TAGBASE:-build}
+
 if [ "$MAKETAG" == "false" ]; then
     exit 0
 fi
@@ -20,7 +23,7 @@ elif [ "$TAGSHA1" != "" ] && [ "$TAGSHA1" != "$SHA1" ]; then
 elif [ "$TAGSHA1" != "" ] && [ "$TAGSHA1" == "$SHA1" ]; then
     echo "Someone else built this version at the same time I did, and we both tagged the same SHA1 with the same build tag. Not pushing my tag."
 else
-    git tag -f -a "build,${MAJOR},${BUILD}" $SHA1
+    git tag -f -a "${VERSIONERS_TAGBASE}${SEP}${MAJOR}${SEP}${BUILD}" $SHA1
     if [ "$PUSHTAG" != "false" ]; then
 	git push --tags
     fi
