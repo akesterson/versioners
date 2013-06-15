@@ -1,10 +1,11 @@
 #!/bin/bash
 
 LOGSPEC='%ci %an <%aE>%n%n    %s%n    [%h]%d%n'
+VERSIONERS_SEPARATOR=${VERSIONERS_SEPARATOR:-,}
 
 BRANCH=$2
 if [ "${BRANCH}" == "" ]; then
-    BRANCH=$(git branch | grep '^\*\s*.*' | cut -d ' ' -f 2)
+    BRANCH=$(git branch | grep '^\*\s*.*' | cut -d ' ' -f 2-)
 fi
 
 REBUILDING=0
@@ -18,8 +19,8 @@ if [ "$TAG" == "" ]; then
     REBUILDING=1
     MAJOR=$BRANCH
 else
-    MAJOR=$(echo $TAG | cut -d , -f 2)
-    BUILD=$(echo $TAG | cut -d , -f 3)
+    MAJOR=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 2)
+    BUILD=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 3)
     if [ "$TAGSHA" != "$SHA1" ]; then
 	CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
 	BUILD=$(expr $BUILD + 1)
