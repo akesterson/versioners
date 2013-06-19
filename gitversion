@@ -22,11 +22,11 @@ else
     MAJOR=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 2)
     BUILD=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 3)
     if [ "$TAGSHA" != "$SHA1" ]; then
-	CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
-	BUILD=$(expr $BUILD + 1)
-	REBUILDING=1
+        CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
+        BUILD=$(expr $BUILD + 1)
+        REBUILDING=1
     else
-	SHA1=$TAGSHA
+        SHA1=$TAGSHA
     fi
 fi
 
@@ -51,11 +51,11 @@ fi
 
 if [ "$ARCH" == "" ]; then
     if [ "$OS_NAME" == "osx" ]; then
-	ARCH=$(uname -m)
+        ARCH=$(uname -m)
     elif [ "$OS_NAME" != "win" ]; then
-	ARCH=$(uname -i)
+        ARCH=$(uname -i)
     elif [ "$OS_NAME" == "win" ]; then
-	ARCH=$(uname -m)
+        ARCH=$(uname -m)
     fi
 fi
 
