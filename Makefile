@@ -71,10 +71,10 @@ uninstall:
 
 install:
 	mkdir -p $(PREFIX)/usr/bin
-	install ./gitversion $(PREFIX)/usr/bin/gitversion.sh
-	install ./hgversion $(PREFIX)/usr/bin/hgversion.sh
-	install ./taggit $(PREFIX)/usr/bin/taggit.sh
-	install ./taghg $(PREFIX)/usr/bin/taghg.sh
+	install ./gitversion.sh $(PREFIX)/usr/bin/gitversion.sh
+	install ./hgversion.sh $(PREFIX)/usr/bin/hgversion.sh
+	install ./taggit.sh $(PREFIX)/usr/bin/taggit.sh
+	install ./taghg.sh $(PREFIX)/usr/bin/taghg.sh
 
 MANIFEST:
 	echo /usr/bin/gitversion.sh > MANIFEST
