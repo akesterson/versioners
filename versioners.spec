@@ -3,8 +3,8 @@ Summary: Automatic Versioning Tools
 Name: versioners
 Version: %{version}
 Release: %{release}
-License: Vocalocity
-Vendor: Vocalocity
+License: Andrew Kesterson
+Vendor: Andrew Kesterson
 Packager: Andrew Kesterson <andrew@aklabs.net>
 Group: Development Tools
 Provides: %{name}
