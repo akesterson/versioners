@@ -63,21 +63,21 @@ $(DISTFILE): version.sh
 	mock -r epel-$(RHEL_VERSION)-noarch ./dist/$(SRPM) --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RELEASE)"
 
 uninstall:
-	rm -f $(PREFIX)/usr/bin/taggit
-	rm -f $(PREFIX)/usr/bin/taghg
-	rm -f $(PREFIX)/usr/bin/gitversion
-	rm -f $(PREFIX)/usr/bin/hgversion
+	rm -f $(PREFIX)/usr/bin/taggit.sh
+	rm -f $(PREFIX)/usr/bin/taghg.sh
+	rm -f $(PREFIX)/usr/bin/gitversion.sh
+	rm -f $(PREFIX)/usr/bin/hgversion.sh
 
 
 install:
 	mkdir -p $(PREFIX)/usr/bin
-	install ./gitversion $(PREFIX)/usr/bin/gitversion
-	install ./hgversion $(PREFIX)/usr/bin/hgversion
-	install ./taggit $(PREFIX)/usr/bin/taggit
-	install ./taghg $(PREFIX)/usr/bin/taghg
+	install ./gitversion $(PREFIX)/usr/bin/gitversion.sh
+	install ./hgversion $(PREFIX)/usr/bin/hgversion.sh
+	install ./taggit $(PREFIX)/usr/bin/taggit.sh
+	install ./taghg $(PREFIX)/usr/bin/taghg.sh
 
 MANIFEST:
-	echo /usr/bin/gitversion > MANIFEST
-	echo /usr/bin/hgversion >> MANIFEST
-	echo /usr/bin/taggit >> MANIFEST
-	echo /usr/bin/taghg >> MANIFEST
+	echo /usr/bin/gitversion.sh > MANIFEST
+	echo /usr/bin/hgversion.sh >> MANIFEST
+	echo /usr/bin/taggit.sh >> MANIFEST
+	echo /usr/bin/taghg.sh >> MANIFEST
