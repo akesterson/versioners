@@ -9,7 +9,7 @@ endif
 RPM=versioners-$(VERSION)-$(RELEASE).noarch.rpm
 
 ifndef PREFIX
-	PREFIX=/
+	PREFIX=''
 endif
 
 DISTFILE_DEPS=$(shell find . -type f | grep -Ev '\.git|\./dist/|$(DISTFILE)')
