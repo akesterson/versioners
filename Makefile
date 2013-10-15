@@ -7,7 +7,9 @@ ifndef RHEL_VERSION
 	RHEL_VERSION=5
 endif
 RPM=versioners-$(VERSION)-$(RELEASE).noarch.rpm
-
+ifeq ($(RHEL_VERSION),5)
+	MOCKFLAGS=--define "_source_filedigest_algorithm md5" --define "_binary_filedigest_algorithm md5"
+endif
 ifndef PREFIX
 	PREFIX=''
 endif
@@ -22,6 +24,9 @@ all: ./dist/$(RPM)
 clean:
 	rm -f $(DISTFILE)
 	rm -fr dist/versioners-$(VERSION)-$(RELEASE)*
+
+version.sh:
+	gitversion.sh > version.sh
 
 dist: $(DISTFILE)
 
@@ -56,11 +61,11 @@ $(DISTFILE): version.sh
 
 ./dist/$(SRPM): $(DISTFILE)
 	rm -fr ./dist/$(SRPM)
-	mock --buildsrpm --spec $(SPECFILE) --sources ./dist/ --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RELEASE)"
+	/usr/bin/mock --buildsrpm --spec $(SPECFILE) $(MOCKFLAGS) --sources ./dist/ --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RELEASE)"
 
 ./dist/$(RPM): ./dist/$(SRPM)
 	rm -fr ./dist/$(RPM)
-	mock -r epel-$(RHEL_VERSION)-noarch ./dist/$(SRPM) --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RELEASE)"
+	/usr/bin/mock -r epel-$(RHEL_VERSION)-noarch ./dist/$(SRPM) --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RELEASE)"
 
 uninstall:
 	rm -f $(PREFIX)/usr/bin/taggit.sh
