@@ -8,7 +8,7 @@ if [ "$MAKETAG" == "false" ]; then
 fi
 
 if [ ! -f version.sh ]; then
-    $(dirname $BASH_SOURCE)/gitversion.sh > version
+    $(dirname $BASH_SOURCE)/gitversion.sh > version.sh
 fi
 
 . ~/.buildtoolsrc || echo
