@@ -7,12 +7,12 @@ if [ "$MAKETAG" == "false" ]; then
     exit 0
 fi
 
-if [ ! -f version ]; then
-    $(dirname $BASH_SOURCE)/genversion > version
+if [ ! -f version.sh ]; then
+    $(dirname $BASH_SOURCE)/gitversion.sh > version
 fi
 
-. ~/.buildtoolsrc
-. version
+. ~/.buildtoolsrc || echo
+. version.sh
 
 WHOLETAG="${VERSIONERS_TAGBASE}${SEP}${MAJOR}${SEP}${BUILD}"
 
