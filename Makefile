@@ -16,7 +16,7 @@ endif
 RHEL_RELEASE:=$(RELEASE).el$(RHEL_VERSION)
 SRPM=versioners-$(VERSION)-$(RHEL_RELEASE).src.rpm
 RPM=versioners-$(VERSION)-$(RHEL_RELEASE).noarch.rpm
-RHEL_DISTFILE=./dist/cmdarg-$(VERSION)-$(RHEL_RELEASE).tar.gz
+RHEL_DISTFILE=./dist/versioners-$(VERSION)-$(RHEL_RELEASE).tar.gz
 
 DISTFILE_DEPS=$(shell find . -type f | grep -Ev '\.git|\./dist/|$(DISTFILE)')
 
