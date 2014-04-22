@@ -62,9 +62,9 @@ $(DISTFILE): version.sh
 	cd dist && tar -czvf ../$@ versioners-$(VERSION)-$(RELEASE)
 
 $(RHEL_DISTFILE): $(DISTFILE)
-       cd dist && \
-               cp -R versioners-$(VERSION)-$(RELEASE) versioners-$(VERSION)-$(RHEL_RELEASE) && \
-               tar -czvf ../$@ versioners-$(VERSION)-$(RHEL_RELEASE)
+	cd dist && \
+		cp -R versioners-$(VERSION)-$(RELEASE) versioners-$(VERSION)-$(RHEL_RELEASE) && \
+		tar -czvf ../$@ versioners-$(VERSION)-$(RHEL_RELEASE)
 
 ./dist/$(SRPM): $(RHEL_DISTFILE)
 	rm -fr ./dist/$(SRPM)
