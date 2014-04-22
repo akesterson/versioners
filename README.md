@@ -1,6 +1,8 @@
 Versioners
 ==========
 
+[![Build Status](http://jenkins.aklabs.net/buildStatus/icon?job=versioners-test)](http://jenkins.aklabs.net/view/versioners/job/versioners-test/)
+
 This is a set of scripts that I use for automatically tagging, and generating version/build metadata for, mercurial and git projects. They provide your automation with quite a bit of information about the version being built, where it is built, and who built it. They also generate automatic changelogs for you.
 
 Assumptions
