@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1401322452 source:c:\users\akesterson.akesterson-pc\source\wip\versioners\src\libversion.c
+	"libversion.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1401321683 c:\users\akesterson.akesterson-pc\source\wip\versioners\src\libversion.h
+	<windows.h>
+	<sys/utsname.h>
+
