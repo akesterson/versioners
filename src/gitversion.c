@@ -8,24 +8,26 @@
 #include <windows.h>
 #endif // WIN32
 
-#include "libversion.h"
+#include <libversion.h>
 
 int main(int argc, char *argv[])
 {
+    if ( fwide(stdout, 1) <= 0) {
+        fprintf(stderr, "Couldn't switch to wide character output and I don't know how to cope with that\n");
+        return 1;
+    }
     struct version *myver = NULL;
-    printf("Wat wat\n");
 	myver = lv_new();
 	if (myver == NULL) {
-        printf("Goddammit\n");
 		return 1;
 	}
-	printf("Got myver at %p\n", (void *)myver);
+	wprintf(L"Got myver at %p\n", (void *)myver);
 	lv_system(myver);
-	wprintf((wchar_t *)"Build Host: %s\n", myver->buildhost);
-	//wprintf((wchar_t *)"Build User: %s\n", myver->builduser);
-	// wprintf("Build Arch: %s\n", (T_CHARPTR)&myver->arch);
+	wprintf(L"Build Host: %ls\n", myver->buildhost);
+	wprintf(L"Build User: %ls\n", myver->builduser);
+	wprintf(L"Build Arch: %ls\n", (wchar_t *)&myver->arch);
 	lv_free(myver);
-	//wprintf((wchar_t *)"Freed myver\n");
+	wprintf(L"Freed myver\n");
 	return 0;
 }
 

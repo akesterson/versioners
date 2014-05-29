@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Release">
+			<Target title="Debug">
 				<Option output="../lib/version" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/" />
@@ -15,14 +15,32 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add directory="../include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../lib/version" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
+					<Add directory="../include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="main.c">
+		<Unit filename="../include/libversion.h" />
+		<Unit filename="../src/libversion.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/win32/libversion.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

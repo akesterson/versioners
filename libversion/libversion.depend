@@ -1,11 +1,25 @@
 # depslib dependency file v1.0
-1401322452 source:c:\users\akesterson.akesterson-pc\source\wip\versioners\src\libversion.c
-	"libversion.h"
+1401338576 source:c:\users\akesterson.akesterson-pc\source\wip\versioners\src\libversion.c
+	<libversion.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<wchar.h>
 
 1401321683 c:\users\akesterson.akesterson-pc\source\wip\versioners\src\libversion.h
 	<windows.h>
 	<sys/utsname.h>
+
+1401337312 c:\users\akesterson.akesterson-pc\source\wip\versioners\include\libversion.h
+	<windows.h>
+	<sys/utsname.h>
+	<wchar.h>
+
+1401340792 source:c:\users\akesterson.akesterson-pc\source\wip\versioners\src\win32\libversion.c
+	<libversion.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<wchar.h>
+	<winsock2.h>
 
