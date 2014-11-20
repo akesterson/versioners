@@ -43,9 +43,9 @@ These don't support debian yet - feel free to submit a patch.
 Generate a version
 ==================
 
-Two scripts, 'gitversion' and 'hgversion' generate version metadata for git and hg, respectively. The data output by these two is meant to be consumed by bash.
+Two scripts, 'gitversion.sh' and 'hgversion.sh' generate version metadata for git and hg, respectively. The data output by these two is meant to be consumed by bash.
 
-    []$ hgversion
+    []$ gitversion.sh
     TAG="build,6.3.0,0"
     BRANCH="6.3.0"
     MAJOR="6.3.0"
@@ -69,9 +69,9 @@ The changelog will contain a brief log of all commits between the previous build
 Cutting a Tag
 =============
 
-To cut a tag, just run 'taggit' or 'taghg':
+To cut a tag, just run 'taggit.sh' or 'taghg.sh':
 
-    []$ taggit
+    []$ taggit.sh
 
 ... This will tag the current revision with a new build number. UNLESS:
 
