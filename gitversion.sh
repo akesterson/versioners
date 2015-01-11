@@ -10,7 +10,7 @@ fi
 
 REBUILDING=0
 SHA1=$(git rev-parse HEAD)
-TAG=$(git describe --tags --abbrev=0 `git rev-list --tags --max-count=1 HEAD` 2>/dev/null)
+TAG=$(git describe --tags --abbrev=0 2>/dev/null)
 BUILD=0
 TAGSHA=$(git rev-list $TAG | head -n 1)
 CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD)"
