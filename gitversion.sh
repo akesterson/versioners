@@ -2,6 +2,7 @@
 
 LOGSPEC='%ci %an <%aE>%n%n    %s%n    [%h]%d%n'
 VERSIONERS_SEPARATOR=${VERSIONERS_SEPARATOR:-,}
+VERSIONERS_TAGBASE=${VERSIONERS_TAGBASE:-build}
 
 BRANCH=$2
 if [ "${BRANCH}" == "" ]; then
@@ -10,7 +11,7 @@ fi
 
 REBUILDING=0
 SHA1=$(git rev-parse HEAD)
-TAG=$(git describe --tags --abbrev=0 2>/dev/null)
+TAG=$(git log --tags --simplify-by-decoration --pretty="format:%D" | grep -Eo "${VERSIONERS_TAGBASE},[0-9\.]+,[0-9]+" 2>/dev/null)
 BUILD=0
 TAGSHA=$(git rev-list $TAG | head -n 1)
 CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD)"
