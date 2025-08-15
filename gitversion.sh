@@ -63,6 +63,7 @@ fi
 SOURCE=$((git remote show origin 2>/dev/null | grep "Fetch URL" | cut -d : -f 2- | cut -d ' ' -f 2-) || echo '')
 
 echo "TAG=\"${TAG}\""
+echo "LASTSHA=\"${TAGSHA}\""
 echo "BRANCH=\"${BRANCH}\""
 echo "MAJOR=\"${MAJOR}\""
 echo "BUILD=\"${BUILD}\""
