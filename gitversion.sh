@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOGSPEC='%ci %an <%aE>%n%n    %B%n    [%h]%d%n'
+LOGSPEC=${LOGSPEC:-'%ci %an <%aE>%n%n%B%n    [%h]%d%n'}
 VERSIONERS_SEPARATOR=${VERSIONERS_SEPARATOR:-,}
 VERSIONERS_TAGBASE=${VERSIONERS_TAGBASE:-build}
 
