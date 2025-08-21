@@ -11,7 +11,7 @@ fi
 
 REBUILDING=0
 SHA1=$(git rev-parse HEAD)
-TAG=$(git log --tags --simplify-by-decoration --pretty="format:%D" | grep -Eo "${VERSIONERS_TAGBASE},[0-9\.]+,[0-9]+" 2>/dev/null)
+TAG=$(git log --tags --simplify-by-decoration --pretty="format:%D" | grep -Eo "${VERSIONERS_TAGBASE},[0-9\.]+,[0-9]+" 2>/dev/null | head -n 1)
 BUILD=0
 TAGSHA=$(git rev-list $TAG | head -n 1)
 CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD)"
