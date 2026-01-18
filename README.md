@@ -1,8 +1,6 @@
 Versioners
 ==========
 
-[![Build Status](http://jenkins.aklabs.net/buildStatus/icon?job=versioners-test)](http://jenkins.aklabs.net/view/versioners/job/versioners-test/)
-
 This is a set of scripts that I use for automatically tagging, and generating version/build metadata for, mercurial and git projects. They provide your automation with quite a bit of information about the version being built, where it is built, and who built it. They also generate automatic changelogs for you.
 
 Assumptions
@@ -39,6 +37,19 @@ OS_NAME possible values:
 OS_VERSION will contain the version number of the OS_NAME in question, except for 'win', which does not have compact or sane version numbers.
 
 These don't support debian yet - feel free to submit a patch.
+
+Installing
+==========
+
+```
+make install
+```
+
+The default location is in `/usr`. To change the installation location specify `PREFIX`
+
+```
+PREFIX=/custom/location make install
+```
 
 Generate a version
 ==================

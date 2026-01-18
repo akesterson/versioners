@@ -6,6 +6,9 @@ SPECFILE=versioners.spec
 ifndef RHEL_VERSION
 	RHEL_VERSION=5
 endif
+ifndef PREFIX
+	PREFIX=/usr
+endif
 ifeq ($(RHEL_VERSION),5)
 	MOCKFLAGS=--define "_source_filedigest_algorithm md5" --define "_binary_filedigest_algorithm md5"
 endif
@@ -75,21 +78,21 @@ $(RHEL_DISTFILE): $(DISTFILE)
 	/usr/bin/mock --verbose -r epel-$(RHEL_VERSION)-noarch ./dist/$(SRPM) --resultdir ./dist/ --define "version $(VERSION)" --define "release $(RHEL_RELEASE)"
 
 uninstall:
-	rm -f $(PREFIX)/usr/bin/taggit.sh
-	rm -f $(PREFIX)/usr/bin/taghg.sh
-	rm -f $(PREFIX)/usr/bin/gitversion.sh
-	rm -f $(PREFIX)/usr/bin/hgversion.sh
+	rm -f $(PREFIX)/bin/taggit.sh
+	rm -f $(PREFIX)/bin/taghg.sh
+	rm -f $(PREFIX)/bin/gitversion.sh
+	rm -f $(PREFIX)/bin/hgversion.sh
 
 
 install:
-	mkdir -p $(PREFIX)/usr/bin
-	install ./gitversion.sh $(PREFIX)/usr/bin/gitversion.sh
-	install ./hgversion.sh $(PREFIX)/usr/bin/hgversion.sh
-	install ./taggit.sh $(PREFIX)/usr/bin/taggit.sh
-	install ./taghg.sh $(PREFIX)/usr/bin/taghg.sh
+	mkdir -p $(PREFIX)/bin
+	install ./gitversion.sh $(PREFIX)/bin/gitversion.sh
+	install ./hgversion.sh $(PREFIX)/bin/hgversion.sh
+	install ./taggit.sh $(PREFIX)/bin/taggit.sh
+	install ./taghg.sh $(PREFIX)/bin/taghg.sh
 
 MANIFEST:
-	echo /usr/bin/gitversion.sh > MANIFEST
-	echo /usr/bin/hgversion.sh >> MANIFEST
-	echo /usr/bin/taggit.sh >> MANIFEST
-	echo /usr/bin/taghg.sh >> MANIFEST
+	echo $(PREFIX)/bin/gitversion.sh > MANIFEST
+	echo $(PREFIX)/bin/hgversion.sh >> MANIFEST
+	echo $(PREFIX)/bin/taggit.sh >> MANIFEST
+	echo $(PREFIX)/bin/taghg.sh >> MANIFEST
