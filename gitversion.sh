@@ -27,7 +27,7 @@ else
     MAJOR=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 2)
     BUILD=$(echo $TAG | cut -d ${VERSIONERS_SEPARATOR} -f 3)
     if [ "$TAGSHA" != "$SHA1" ]; then
-        CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1)"
+        CHANGELOG="$(git log --format="format:$LOGSPEC" $TAGSHA..$SHA1 | base64)"
         BUILD=$(expr $BUILD + 1)
         REBUILDING=1
     else

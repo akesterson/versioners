@@ -75,7 +75,7 @@ Two scripts, 'gitversion.sh' and 'hgversion.sh' generate version metadata for gi
 
 This can be piped into a bash script for later sourcing. You can source this into a variety of other languages as well (python or ruby), but the ${:-} syntax is bash specific, and might confuse other languages.
 
-The changelog will contain a brief log of all commits between the previous build tag and this build.
+The changelog will contain a brief log of all commits between the previous build tag and this build. The changelog is a base64 encoded string, so that when you source the version file into your shell scripts, embedded shell escapes in the changelog string will not be processed.
 
 Cutting a Tag
 =============

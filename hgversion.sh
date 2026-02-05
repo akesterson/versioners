@@ -21,7 +21,7 @@ else
     SHORTTAGSHA=${TAGSHA:0:12}
     hg log -r tip | grep "Added tag build|${BRANCH}|${BUILD} for changeset ${SHORTTAGSHA}" >/dev/null
     if [ $? -ne 0 ] && [ "$TAGSHA" != "$SHA1" ]; then
-	CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${SHORTTAGSHA}:${SHA1})"
+	CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${SHORTTAGSHA}:${SHA1} | base64)"
 	BUILD=$(expr $BUILD + 1)
 	REBUILDING=1
     else
