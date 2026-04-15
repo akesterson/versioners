@@ -10,7 +10,7 @@ SHA1=$(hg identify -i | grep -Eo "[a-zA-Z0-9]+")
 TAG=$(hg parents --template '{latesttag}')
 TAGSHA=$(hg identify -r $TAG | cut -d ' ' -f 1)
 BUILD=0
-CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${TAG}:${SHA1})"
+CHANGELOG="$(hg log --branch $BRANCH -X .hgtags --style=changelog -r ${TAG}:${SHA1} | base64)"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1

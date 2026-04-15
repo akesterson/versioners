@@ -18,7 +18,7 @@ if [[ "$TAG" != "" ]]; then
 else
     TAGSHA=$(git rev-list --max-parents=0 HEAD)
 fi
-CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD)"
+CHANGELOG="$(git log --format="format:$LOGSPEC" ${TAGSHA}..HEAD | base64)"
 if [ "$TAG" == "" ]; then
     BUILD=0
     REBUILDING=1
